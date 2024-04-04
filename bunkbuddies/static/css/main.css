@@ -24,7 +24,7 @@
   --default-color: #212529;
   --default-color-rgb: 33, 37, 41;
   --accent-color: #1282a2;
-  --accent-color-rgb: 232, 69, 69;
+  --accent-color-rgb: 69, 69, 232;
   --heading-color: #32353a;
   --heading-color-rgb: 50, 53, 58;
   --contrast-color: #ffffff;
@@ -1254,7 +1254,7 @@ section,
 
 .contact .php-email-form .error-message {
   display: none;
-  background: #df1529;
+  background: #003566;
   color: #ffffff;
   text-align: left;
   padding: 15px;
