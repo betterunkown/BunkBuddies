@@ -1,17 +1,49 @@
-/**
-* Template Name: Append
-* Template URL: https://bootstrapmade.com/append-bootstrap-website-template/
-* Updated: Mar 17 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
 (function() {
   "use strict";
 
-  /**
-   * Preloader
-   */
+  // Function to handle form submission
+  function handleFormSubmission(event) {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    const form = document.getElementById('contact-form');
+    const messageDiv = document.getElementById('contact-message');
+
+    // Perform form submission using fetch API or XMLHttpRequest
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}' // Add CSRF token header
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        messageDiv.textContent = 'Your message has been sent. Thank you!';
+        messageDiv.style.display = 'block';
+        form.reset(); // Reset the form
+      } else {
+        messageDiv.textContent = 'Error: ' + data.error;
+        messageDiv.style.display = 'block';
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      messageDiv.textContent = 'An error occurred while sending the message. Please try again later.';
+      messageDiv.style.display = 'block';
+    });
+  }
+
+  // Event listener for form submission
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contact-form');
+    if (form) {
+      form.addEventListener('submit', handleFormSubmission);
+    }
+  });
+
+  // Rest of your original code...
+
   const preloader = document.querySelector('#preloader');
   if (preloader) {
     window.addEventListener('load', () => {
@@ -19,9 +51,6 @@
     });
   }
 
-  /**
-   * Scroll top button
-   */
   let scrollTop = document.querySelector('.scroll-top');
 
   function toggleScrollTop() {
@@ -40,9 +69,6 @@
   window.addEventListener('load', toggleScrollTop);
   document.addEventListener('scroll', toggleScrollTop);
 
-  /**
-   * Apply .scrolled class to the body as the page is scrolled down
-   */
   function toggleScrolled() {
     const selectBody = document.querySelector('body');
     const selectHeader = document.querySelector('#header');
@@ -53,9 +79,6 @@
   document.addEventListener('scroll', toggleScrolled);
   window.addEventListener('load', toggleScrolled);
 
-  /**
-   * Scroll up sticky header to headers with .scroll-up-sticky class
-   */
   let lastScrollTop = 0;
   window.addEventListener('scroll', function() {
     const selectHeader = document.querySelector('#header');
@@ -76,9 +99,6 @@
     lastScrollTop = scrollTop;
   });
 
-  /**
-   * Mobile nav toggle
-   */
   const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
 
   function mobileNavToogle() {
@@ -87,10 +107,58 @@
     mobileNavToggleBtn.classList.toggle('bi-x');
   }
   mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
+  // Add this code inside the IIFE after other event listeners
+  // Add this code inside the IIFE after other event listeners
+document.addEventListener('DOMContentLoaded', function() {
+  // Function to handle highlighting active navigation item
+  function highlightActiveNavItem() {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('#navmenu a');
 
-  /**
-   * Hide mobile nav on same-page/hash links
-   */
+    sections.forEach(function(section) {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      const scrollY = window.scrollY;
+
+      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        const sectionId = section.id;
+        navLinks.forEach(function(link) {
+          if (link.getAttribute('href') === '#' + sectionId) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+    });
+  }
+// Add smooth scrolling functionality to useful links
+// Add smooth scrolling functionality to useful links
+document.addEventListener('DOMContentLoaded', function() {
+  const usefulLinks = document.querySelectorAll('#useful-links a');
+  
+  usefulLinks.forEach(function(link) {
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+      const sectionId = this.getAttribute('href').substring(1); // Remove the leading '#'
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+});
+
+
+  // Highlight the active navigation item initially
+  highlightActiveNavItem();
+
+  // Listen for scroll events to update active navigation item
+  document.addEventListener('scroll', highlightActiveNavItem);
+});
+
+
+
   document.querySelectorAll('#navmenu a').forEach(navmenu => {
     navmenu.addEventListener('click', () => {
       if (document.querySelector('.mobile-nav-active')) {
@@ -100,10 +168,6 @@
 
   });
 
-
-  /**
-   * Correct scrolling position upon page load for URLs containing hash links.
-   */
   window.addEventListener('load', function(e) {
     if (window.location.hash) {
       if (document.querySelector(window.location.hash)) {
@@ -119,21 +183,12 @@
     }
   });
 
-  /**
-   * Initiate glightbox
-   */
   const glightbox = GLightbox({
     selector: '.glightbox'
   });
 
-  /**
-   * Initiate Pure Counter
-   */
   new PureCounter();
 
-  /**
-   * Init isotope layout and filters
-   */
   document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {
     let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
     let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
@@ -164,18 +219,12 @@
 
   });
 
-  /**
-   * Frequently Asked Questions Toggle
-   */
   document.querySelectorAll('.faq-item h3, .faq-item .faq-toggle').forEach((faqItem) => {
     faqItem.addEventListener('click', () => {
       faqItem.parentNode.classList.toggle('faq-active');
     });
   });
 
-  /**
-   * Init swiper sliders
-   */
   function initSwiper() {
     document.querySelectorAll('.swiper').forEach(function(swiper) {
       let config = JSON.parse(swiper.querySelector('.swiper-config').innerHTML.trim());
@@ -184,9 +233,6 @@
   }
   window.addEventListener('load', initSwiper);
 
-  /**
-   * Animation on scroll function and init
-   */
   function aosInit() {
     AOS.init({
       duration: 600,

@@ -53,14 +53,13 @@
       <!-- Nav Menu -->
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="index.html#hero" class="active">Home</a></li>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#services">Services</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
-
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav><!-- End Nav Menu -->
+      </nav>
 
     </div>
   </header><!-- End Header -->
@@ -529,33 +528,35 @@
               </div><!-- End Info Item -->
 
             </div>
+            <div class="col-lg-6">
+              <form action="{% url 'contact_submit' %}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+                  {% csrf_token %}
+                  <div class="row gy-4">
+                      <div class="col-md-6">
+                          <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                      </div>
+                      <div class="col-md-6">
+                          <input type="text" class="form-control" name="phone_number" placeholder="Phone Number" required>
+                      </div>
+                      <div class="col-md-12">
+                          <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                      </div>
+                      <div class="col-md-12">
+                          <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                      </div>
+                      <div class="col-md-12 text-center">
+                          <div class="loading">Loading</div>
+                          <div class="error-message"></div>
+                          <div class="sent-message">Your message has been sent. Thank you!</div>
+                          <div id="contact-message" style="display: none;"></div>
 
+                          <button type="submit">Send Message</button>
+                      </div>
+                  </div>
+              </form>
           </div>
-          <div class="col-lg-6">
-            <form action="{% url 'contact_submit' %}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-              {% csrf_token %}
-              <div class="row gy-4">
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" name="phonenumber" placeholder="Phone Number" required>
-                </div>
-                <div class="col-md-12">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required>
-                </div>
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
-                </div>
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-                  <button type="submit">Send Message</button>
-                </div>
-              </div>
-            </form>
-          </div>
+          
+
           
 
 
@@ -588,9 +589,11 @@
         <div class="col-lg-2 col-6 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><a href="index.html#hero">Home</a></li>
-            <li><a href="index.html#about">About us</a></li>
-            <li><a href="index.html#services">Services</a></li>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#faq">FAQs</a></li>
+           
           </ul>
         </div>
 
